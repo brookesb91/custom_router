@@ -1,6 +1,6 @@
 import 'package:custom_router/custom_route_parser.dart';
 import 'package:custom_router/custom_router_delegate.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class CustomRouter {
   final Map<String, WidgetBuilder> routes;
