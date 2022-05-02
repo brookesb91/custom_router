@@ -1,4 +1,5 @@
 import 'package:custom_router/custom_route_configuration.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// The parser used to parse the route name and query parameters from the
@@ -11,12 +12,17 @@ class CustomRouteParser
   @override
   Future<CustomRouteConfiguration> parseRouteInformation(
       RouteInformation routeInformation) {
-    assert(routeInformation.location != null);
+    final uri = Uri.parse(routeInformation.location ?? '/');
 
-    final uri = Uri.parse(routeInformation.location!);
     final config = CustomRouteConfiguration(
         path: uri.path, queryParameters: uri.queryParameters);
 
-    return Future.value(config);
+    return SynchronousFuture(config);
+  }
+
+  @override
+  RouteInformation restoreRouteInformation(
+      CustomRouteConfiguration configuration) {
+    return RouteInformation(location: configuration.path);
   }
 }
