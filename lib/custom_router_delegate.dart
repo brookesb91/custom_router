@@ -1,6 +1,6 @@
 import 'package:custom_router/custom_route_configuration.dart';
 import 'package:custom_router/custom_router_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class CustomRouterDelegate extends RouterDelegate<CustomRouteConfiguration>
     with
