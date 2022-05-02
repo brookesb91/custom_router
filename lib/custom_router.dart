@@ -4,15 +4,14 @@ import 'package:flutter/widgets.dart';
 
 class CustomRouter {
   final Map<String, WidgetBuilder> routes;
-  final String initialRoute;
-  final WidgetBuilder onUnknownRoute;
+
   final CustomRouterDelegate delegate;
   final CustomRouteParser parser;
 
   CustomRouter(
     this.routes, {
-    required this.onUnknownRoute,
-    this.initialRoute = '/',
+    required WidgetBuilder onUnknownRoute,
+    String initialRoute = '/',
   })  : delegate = CustomRouterDelegate(routes,
             onUnknownRoute: onUnknownRoute, initialRoute: initialRoute),
         parser = CustomRouteParser();
