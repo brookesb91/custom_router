@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:custom_router/custom_route_configuration.dart';
 import 'package:custom_router/custom_router_state.dart';
 import 'package:flutter/foundation.dart';
@@ -54,7 +56,7 @@ class CustomRouterDelegate extends RouterDelegate<CustomRouteConfiguration>
   List<Page> getPages() {
     return _state.stack.map((config) {
       return MaterialPage(
-          key: ValueKey(config.path),
+          key: ValueKey('${config.path}${config.queryParameters}'),
           child: Builder(builder: routes[config.path]!));
     }).toList();
   }

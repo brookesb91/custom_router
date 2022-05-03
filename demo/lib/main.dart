@@ -8,6 +8,8 @@ void main() {
   runApp(const MyApp());
 }
 
+/// Create an instance of `CustomRouter` and
+/// define your routes.
 final router = CustomRouter(
   {
     '/': HomePage.route,
