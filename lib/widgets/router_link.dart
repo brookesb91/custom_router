@@ -19,7 +19,7 @@ class RouterLink extends StatelessWidget {
 
     return builder(context, () {
       final name = uri.toString();
-      context.route.navigate(name);
+      context.router.navigate(name);
     });
   }
 }

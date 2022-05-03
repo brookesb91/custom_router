@@ -31,5 +31,5 @@ class CustomRouterState extends ChangeNotifier {
 }
 
 extension CustomRouterStateContextExtension on BuildContext {
-  CustomRouterState get route => CustomRouterState.instance;
+  CustomRouterState get router => CustomRouterState.instance;
 }

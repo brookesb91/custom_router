@@ -7,13 +7,12 @@ class CustomRouterDelegate extends RouterDelegate<CustomRouteConfiguration>
     with
         ChangeNotifier,
         PopNavigatorRouterDelegateMixin<CustomRouteConfiguration> {
-  final GlobalKey<NavigatorState> _navigatorKey;
-
   final Map<String, WidgetBuilder> routes;
   final WidgetBuilder onUnknownRoute;
   final String initialRoute;
 
   final CustomRouterState _state = CustomRouterState.instance;
+  final GlobalKey<NavigatorState> _navigatorKey;
 
   @override
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
