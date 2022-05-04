@@ -16,12 +16,17 @@ class CustomRouter {
     String initialRoute = '/',
     required WidgetBuilder onUnknownRoute,
     required Widget Function(
-            CustomRouterDelegate delegate, CustomRouteParser parser)
+      CustomRouterDelegate delegate,
+      CustomRouteParser parser,
+    )
         builder,
   }) {
     return builder(
-      CustomRouterDelegate(routes,
-          onUnknownRoute: onUnknownRoute, initialRoute: initialRoute),
+      CustomRouterDelegate(
+        routes,
+        onUnknownRoute: onUnknownRoute,
+        initialRoute: initialRoute,
+      ),
       CustomRouteParser(),
     );
   }

@@ -33,19 +33,6 @@ class _MyAppState extends State<MyApp> {
       });
     }
 
-    final router = CustomRouter(
-      _isAuthorised
-          ? {
-              '/': HomePage.route,
-              '/friends': FriendsPage.route,
-              '/profile': ProfilePage.route,
-            }
-          : {
-              '/': LoginPage.route,
-            },
-      onUnknownRoute: (_) => const Text('Unknown route'),
-    );
-
     return CustomRouter.builder(
       _isAuthorised
           ? {
@@ -63,11 +50,6 @@ class _MyAppState extends State<MyApp> {
           routeInformationParser: parser,
         );
       },
-    );
-
-    return MaterialApp.router(
-      routerDelegate: router.delegate,
-      routeInformationParser: router.parser,
     );
   }
 }
