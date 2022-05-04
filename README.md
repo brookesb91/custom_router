@@ -1,5 +1,17 @@
 # Custom Flutter Router
 
+## Install
+
+In `pubspec.yaml`:
+
+```yaml
+dependencies:
+  custom_router:
+    git:
+      url: https://github.com/brookesb91/custom_router.git
+      ref: v0.0.2
+```
+
 ## Usage
 
 ### Basic usage
