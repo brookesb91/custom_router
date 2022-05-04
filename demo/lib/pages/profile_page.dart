@@ -1,17 +1,19 @@
-import 'package:custom_router/custom_router_state.dart';
+import 'package:custom_router/custom_router.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
   final String profileId;
 
-  static ProfilePage route(BuildContext context) {
-    final params = context.router.queryParameters;
+  static Widget route(BuildContext context) {
+    return RouteStateBuilder(builder: (context, state) {
+      final profileId = state.queryParameters['profileId'];
 
-    assert(params['profileId'] != null, 'profileId is required');
+      assert(profileId != null, 'profileId is required');
 
-    return ProfilePage(
-      profileId: params['profileId'] as String,
-    );
+      return ProfilePage(
+        profileId: profileId as String,
+      );
+    });
   }
 
   const ProfilePage({Key? key, required this.profileId}) : super(key: key);
