@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:custom_router/custom_route_configuration.dart';
 import 'package:custom_router/custom_router_state.dart';
 import 'package:flutter/foundation.dart';
