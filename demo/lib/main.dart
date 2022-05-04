@@ -33,15 +33,6 @@ class _MyAppState extends State<MyApp> {
       });
     }
 
-    final router2 = CustomRouter(
-      {
-        '/': HomePage.route,
-        '/friends': FriendsPage.route,
-        '/profile': ProfilePage.route,
-      },
-      onUnknownRoute: (_) => const Text('Unknown route'),
-    );
-
     final router = CustomRouter(
       _isAuthorised
           ? {
@@ -53,6 +44,25 @@ class _MyAppState extends State<MyApp> {
               '/': LoginPage.route,
             },
       onUnknownRoute: (_) => const Text('Unknown route'),
+    );
+
+    return CustomRouter.builder(
+      _isAuthorised
+          ? {
+              '/': HomePage.route,
+              '/friends': FriendsPage.route,
+              '/profile': ProfilePage.route,
+            }
+          : {
+              '/': LoginPage.route,
+            },
+      onUnknownRoute: (_) => const Text('Unknown route'),
+      builder: (delegate, parser) {
+        return MaterialApp.router(
+          routerDelegate: delegate,
+          routeInformationParser: parser,
+        );
+      },
     );
 
     return MaterialApp.router(
