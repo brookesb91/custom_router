@@ -15,10 +15,7 @@ class RouterLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final uri = Uri(path: path, queryParameters: queryParameters);
-
     return builder(context, () {
-      // final name = uri.toString();
       context.router.navigate(path, queryParameters: queryParameters);
     });
   }
