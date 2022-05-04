@@ -1,8 +1,8 @@
 import 'package:custom_router/custom_route_parser.dart';
 import 'package:custom_router/custom_router_delegate.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class CustomRouter extends StatelessWidget {
+class CustomRouter {
   final Map<String, WidgetBuilder> routes;
 
   final CustomRouterDelegate delegate;
@@ -10,17 +10,9 @@ class CustomRouter extends StatelessWidget {
 
   CustomRouter(
     this.routes, {
-    Key? key,
     required WidgetBuilder onUnknownRoute,
     String initialRoute = '/',
   })  : delegate = CustomRouterDelegate(routes,
             onUnknownRoute: onUnknownRoute, initialRoute: initialRoute),
-        parser = CustomRouteParser(),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-        routeInformationParser: parser, routerDelegate: delegate);
-  }
+        parser = CustomRouteParser();
 }

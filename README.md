@@ -2,32 +2,61 @@
 
 ## Usage
 
+### Basic usage
+
 ```dart
 import 'package:custom_router/custom_router.dart';
 
-class App extends StatelessWidget {
-  /// Create a `CustomRouter`
-  /// by supplying a string map of widget builders
-  /// and a builder for unknown routes.
-  final CustomRouter _router = CustomRouter(
-    {
-      '/': (context) => const HomePage(),
-      '/login': (context) => const LoginPage(),
-    },
-    onUnknownRoute: (context) {
-      return const Text('Route Not Found.');
-    },
-  );
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-  const App({Key? key}) : super(key: key);
-
-   @override
+  // This widget is the root of your application.
+  @override
   Widget build(BuildContext context) {
-    /// Use the router.
-    return MaterialApp.router(
-      routeInformationParser: _router.parser,
-      routerDelegate: _router.delegate,
+    return CustomRouter(
+      const {
+        '/': HomePage.route,
+        '/friends': FriendsPage.route,
+        '/profile': ProfilePage.route,
+      },
+      onUnknownRoute: (_) => const Center(
+        child: Text('Unknown route'),
+      ),
     );
+  }
+}
+```
+
+### Advanced with splash screen and authorised routes
+
+```dart
+import 'package:custom_router/custom_router.dart';
+
+class MyApp extends StatelessWidget {
+  bool _isLoaded = false;
+  bool _isAuthorised = false;
+
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return _isLoaded ? CustomRouter(
+      _isAuthorised ? {
+        '/': HomePage.route,
+        '/friends': FriendsPage.route,
+        '/profile': ProfilePage.route,
+      } : {
+        '/': LoginPage.route,
+        '/register': RegisterPage.route,
+      },
+      onUnknownRoute: (_) => const Center(
+        child: Text('Unknown route'),
+      ),
+    ): SplashPage(onComplete: (authorised) {
+        _isLoaded = true;
+        _isAuthorised = authorised;
+      });
   }
 }
 ```
