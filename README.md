@@ -150,3 +150,21 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
+## Route State
+
+### Using the `RouterStateBuilder` widget
+
+```dart
+static Widget route(BuildContext context) {
+  return RouteStateBuilder(builder: (context, state) {
+    final profileId = state.queryParameters['profileId'];
+
+    assert(profileId != null, 'profileId is required');
+
+    return ProfilePage(
+      profileId: profileId as String,
+    );
+  });
+}
+```
