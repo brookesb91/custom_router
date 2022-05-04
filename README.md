@@ -9,7 +9,7 @@ dependencies:
   custom_router:
     git:
       url: https://github.com/brookesb91/custom_router.git
-      ref: v0.0.2
+      ref: master
 ```
 
 ## Usage
@@ -25,15 +25,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CustomRouter(
-      const {
+    final router = CustomRouter(
+      {
         '/': HomePage.route,
         '/friends': FriendsPage.route,
         '/profile': ProfilePage.route,
       },
-      onUnknownRoute: (_) => const Center(
-        child: Text('Unknown route'),
-      ),
+      onUnknownRoute: (_) => const Text('Unknown route'),
+    );
+
+    return MaterialApp.router(
+      routerDelegate: router.delegate,
+      routeInformationParser: router.parser,
     );
   }
 }
@@ -44,31 +47,46 @@ class MyApp extends StatelessWidget {
 ```dart
 import 'package:custom_router/custom_router.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   bool _isLoaded = false;
   bool _isAuthorised = false;
-
-  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return _isLoaded ? CustomRouter(
-      _isAuthorised ? {
-        '/': HomePage.route,
-        '/friends': FriendsPage.route,
-        '/profile': ProfilePage.route,
-      } : {
-        '/': LoginPage.route,
-        '/register': RegisterPage.route,
-      },
-      onUnknownRoute: (_) => const Center(
-        child: Text('Unknown route'),
-      ),
-    ): SplashPage(onComplete: (authorised) {
-        _isLoaded = true;
-        _isAuthorised = authorised;
+    if (!_isLoaded) {
+      return SplashPage(onComplete: (authorised) {
+        setState(() {
+          _isLoaded = true;
+          _isAuthorised = authorised;
+        });
       });
+    }
+
+    final router = CustomRouter(
+      _isAuthorised
+          ? {
+              '/': HomePage.route,
+              '/friends': FriendsPage.route,
+              '/profile': ProfilePage.route,
+            }
+          : {
+              '/': LoginPage.route,
+            },
+      onUnknownRoute: (_) => const Text('Unknown route'),
+    );
+
+    return MaterialApp.router(
+      routerDelegate: router.delegate,
+      routeInformationParser: router.parser,
+    );
   }
 }
 ```
