@@ -1,5 +1,4 @@
 import 'package:custom_router/custom_route_configuration.dart';
-import 'package:custom_router/custom_router.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomRouterState extends ChangeNotifier {

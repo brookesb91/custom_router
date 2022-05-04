@@ -54,16 +54,18 @@ class CustomRouterDelegate extends RouterDelegate<CustomRouteConfiguration>
   List<Page> getPages() {
     return _state.stack.map((config) {
       return MaterialPage(
-          key: ValueKey('${config.path}${config.queryParameters}'),
-          child: Builder(builder: routes[config.path]!));
+        key: ValueKey('${config.path}${config.queryParameters}'),
+        child: Builder(
+          builder: routes.containsKey(config.path)
+              ? routes[config.path]!
+              : onUnknownRoute,
+        ),
+      );
     }).toList();
   }
 
   @override
   Future<void> setNewRoutePath(CustomRouteConfiguration configuration) async {
-    assert(routes.containsKey(configuration.path),
-        'Unknown route: ${configuration.path}');
-
     _state.setState(stack: [configuration]);
 
     return SynchronousFuture(null);
