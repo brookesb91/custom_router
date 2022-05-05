@@ -16,7 +16,7 @@ class CustomRouteParser
 
     final config = CustomRouteConfiguration(
       path: uri.path,
-      queryParameters: uri.queryParameters.isEmpty ? null : uri.queryParameters,
+      queryParameters: uri.queryParameters,
     );
 
     return SynchronousFuture(config);
@@ -27,7 +27,9 @@ class CustomRouteParser
       CustomRouteConfiguration configuration) {
     final uri = Uri(
       path: configuration.path,
-      queryParameters: configuration.queryParameters,
+      queryParameters: configuration.queryParameters.isEmpty
+          ? null
+          : configuration.queryParameters,
     );
     return RouteInformation(location: uri.toString());
   }

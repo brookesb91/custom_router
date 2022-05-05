@@ -19,7 +19,7 @@ class CustomRouterDelegate extends RouterDelegate<CustomRouteConfiguration>
 
   @override
   CustomRouteConfiguration get currentConfiguration {
-    return _state.stack.last;
+    return _state.currentConfiguration;
   }
 
   CustomRouterDelegate(

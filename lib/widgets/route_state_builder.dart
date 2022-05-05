@@ -1,19 +1,9 @@
-import 'package:custom_router/custom_router_state.dart';
+import 'package:custom_router/custom_router.dart';
 import 'package:flutter/material.dart';
-
-class RouteState {
-  final String path;
-  final Map<String, String> queryParameters;
-
-  RouteState({
-    required this.path,
-    this.queryParameters = const {},
-  });
-}
 
 class RouteStateBuilder extends StatelessWidget {
   final CustomRouterState _state = CustomRouterState.instance;
-  final Function(BuildContext context, RouteState state) builder;
+  final Function(BuildContext context, CustomRouteConfiguration config) builder;
 
   RouteStateBuilder({
     Key? key,
@@ -22,12 +12,8 @@ class RouteStateBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return builder(
-      context,
-      RouteState(
-        path: _state.path,
-        queryParameters: _state.queryParameters,
-      ),
-    );
+    final config = _state.currentConfiguration;
+
+    return builder(context, config);
   }
 }

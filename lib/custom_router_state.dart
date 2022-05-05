@@ -8,13 +8,15 @@ class CustomRouterState extends ChangeNotifier {
   List<CustomRouteConfiguration> _stack = [];
   List<CustomRouteConfiguration> get stack => _stack;
 
+  CustomRouteConfiguration get currentConfiguration => _stack.last;
+
   Map<String, String> get queryParameters =>
-      _stack.isEmpty ? {} : _stack.last.queryParameters!;
+      _stack.isEmpty ? {} : _stack.last.queryParameters;
 
   String get path => _stack.isEmpty ? '' : _stack.last.path;
 
   void navigate(String path,
-      {Map<String, String>? queryParameters, bool clear = false}) {
+      {Map<String, String> queryParameters = const {}, bool clear = false}) {
     if (clear) {
       _stack.clear();
     }
